@@ -1,29 +1,58 @@
+<html>
+
+<body>
 <h1>Books</h1>
 
+
 <header>
-<% @books.each do |book| %>
-    <p>Title</p>
-    <span><%= book.title %></span>
-    <p>Body</p>
-    <span><%= book.body %></span>
-    <span><%=link_to "Show", book_path(book.id) %></span>
-    <span><%=link_to "Edit", edit_book_path(book) %></span>
-    <span><%= link_to "Destroy", destroy_book_path(book), method: :delete, "data-confirm" => "本当に削除しますか?" %></span>
+
+
+  <table>
+    <tr>
+    	<th colspan="" rowspan="" headers="" scope="">Title</th>
+    	<th colspan="" rowspan="" headers="" scope="">Body</th>
+    </tr>
+
+    <% @books.each do |book| %>
+
+    <tr>
+        <td colspan="" rowspan="" headers="" scope=""><span><%= book.title %></span></td>
+        <td colspan="" rowspan="" headers="" scope=""><span><%= book.body %></span></td>
+        <td colspan="" rowspan="" headers="" scope=""><span><%=link_to "Show", book_path(book.id) %></span></td>
+    	<td colspan="" rowspan="" headers="" scope=""></td>
+    	<td colspan="" rowspan="" headers=""><span><%=link_to "Edit", edit_book_path(book) %></span></td>
+    	<td colspan="" rowspan="" headers=""><span><%= link_to "Destroy", destroy_book_path(book), method: :delete, "data-confirm" => "本当に削除しますか?" %></span></td>
+    </tr>
+
  <% end %>
 
+ </table>
 
 
 </header>
 
-<body>
+<main>
 <%= form_for(@book, url: '/books') do |f| %>
-    <h4>Title</h4>
-    <%= f.text_field :title %>
 
-    <h4>Body</h4>
-    <%= f.text_area :body %>
+	<%= render 'layouts/errors_messages', model: f.object %>
+
+	<h2>New Book</h2>
+    <label for="book_title">Title</label>
+    <div class="field">
+    	<%= f.text_field :title %>
+    </div>
+
+    <label for="book_body">body</label>
+    <div class="field">
+    	<%= f.text_area :body %>
+    </div>
+
 
     <%= f.submit 'Create Book' %>
-</body>
+</main>
+
+
 
 <% end %>
+
+</body>

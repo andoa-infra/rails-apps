@@ -34,7 +34,17 @@
 <main>
 <%= form_for(@book, url: '/books') do |f| %>
 
-	<%= render 'layouts/errors_messages', model: f.object %>
+  <% if @book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this message from being saved:</h2>
+
+      <ul>
+        <% @book.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
 	<h2>New Book</h2>
     <label for="book_title">Title</label>
